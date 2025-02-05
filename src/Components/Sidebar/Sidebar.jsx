@@ -2,6 +2,11 @@ import { NavLink } from "react-router-dom";
 
 
 const Sidebar = () => {
+
+    const handleNavLinkClick = () => {
+        document.getElementById('my-drawer-2').checked = false;
+    }
+
     return (
         <div>
             <div className="drawer lg:drawer-open">
@@ -16,7 +21,7 @@ const Sidebar = () => {
 
                         {/* Merged Static Sidebar Content */}
                         <div className="space-y-3">
-                            <div className="flex items-center justify-between">
+                            <div className="flex flex-col-reverse md:flex-row items-center justify-between">
                                 <h2 className="text-2xl font-semibold">Dashboard</h2>
                                 {/* Close button for small devices */}
                                 <div className="lg:hidden flex justify-end mb-4">
@@ -27,14 +32,18 @@ const Sidebar = () => {
                                 <ul className="pt-2 pb-4 space-y-4 text-sm">
                                     <li className="rounded-sm">
                                         <NavLink to={'allUsers'}
-                                            className={({ isActive }) => isActive ? 'flex items-center p-2 space-x-3 rounded-md bg-white text-custom-secondary shadow-lg shadow-custom-primary' : 'flex items-center p-2 space-x-3 rounded-md text-white hover:scale-105 hover:border hover:border-white transition duration-700'}>
+                                            className={({ isActive }) => isActive ? 'flex items-center p-2 space-x-3 rounded-md bg-white text-custom-secondary shadow-lg shadow-custom-primary' : 'flex items-center p-2 space-x-3 rounded-md bg-gray-600 text-white hover:scale-105 hover:border hover:border-white transition duration-700'}
+                                            onClick={handleNavLinkClick}
+                                            >
                                             <i className="fa-solid fa-user"></i>
                                             <span>Users</span>
                                         </NavLink>
                                     </li>
                                     <li className="rounded-sm">
                                         <NavLink to={'products'}
-                                            className={({ isActive }) => isActive ? 'flex items-center p-2 space-x-3 rounded-md bg-white text-custom-secondary shadow-lg shadow-custom-primary' : 'flex items-center p-2 space-x-3 rounded-md text-white hover:scale-105 hover:border hover:border-white transition duration-700'}>
+                                            className={({ isActive }) => isActive ? 'flex items-center p-2 space-x-3 rounded-md bg-white text-custom-secondary shadow-lg shadow-custom-primary' : 'flex items-center p-2 space-x-3 rounded-md bg-gray-600 text-white hover:scale-105 hover:border hover:border-white transition duration-700'}
+                                            onClick={handleNavLinkClick}
+                                            >
                                             <i className="fa-solid fa-box"></i>
                                             <span>Products</span>
                                         </NavLink>
