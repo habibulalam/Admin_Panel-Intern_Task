@@ -9,6 +9,7 @@ import {
 import ErrorPage from './Components/Error Page/ErrorPage.jsx';
 import AllUsers from './Components/All Users/AllUsers.jsx';
 import Products from './Components/Products/Products.jsx';
+import SingleUser from './Components/Single User/SingleUser.jsx';
 
 const router = createBrowserRouter([
   {
@@ -17,12 +18,16 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
-        path: "allUsers",
+        path: "/allUsers",
         element: <AllUsers></AllUsers>
       },
       {
-        path: "products",
+        path: "/products",
         element: <Products></Products>,
+      },
+      {
+        path: "/singleUser/:userId",
+        element: <SingleUser></SingleUser>,
       },
     ]
   },

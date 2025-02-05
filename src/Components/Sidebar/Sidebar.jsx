@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 
 const Sidebar = () => {
@@ -9,7 +9,7 @@ const Sidebar = () => {
 
     return (
         <div>
-            <div className="drawer lg:drawer-open">
+            <div className="drawer lg:drawer-open z-40">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col items-start justify-start">
                     {/* Page content here */}
@@ -22,7 +22,7 @@ const Sidebar = () => {
                         {/* Merged Static Sidebar Content */}
                         <div className="space-y-3">
                             <div className="flex flex-col-reverse md:flex-row items-center justify-between">
-                                <h2 className="text-2xl font-semibold">Dashboard</h2>
+                                <Link to={'/'}><h2 className="text-2xl font-semibold">Dashboard</h2></Link>
                                 {/* Close button for small devices */}
                                 <div className="lg:hidden flex justify-end mb-4">
                                     <label htmlFor="my-drawer-2" className="btn btn-secondary">Close</label>
