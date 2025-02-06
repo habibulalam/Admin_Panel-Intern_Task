@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useProducts } from "../Product Context Api/ProductContext";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
+    const navigateToAllProducts = useNavigate();
     const { products, addProduct } = useProducts();
     const [formData, setFormData] = useState({
         productId: '',
@@ -52,7 +54,7 @@ const AddProduct = () => {
             color: ''
         });
 
-        alert('Product added successfully!');
+        navigateToAllProducts('/products')
     };
 
     return (

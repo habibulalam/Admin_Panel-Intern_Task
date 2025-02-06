@@ -45,7 +45,18 @@ export const ProductsProvider = ({ children }) => {
 
   const addProduct = (newProduct) => {
     const normalizedProduct = normalizeKeys(newProduct);
-    setProducts([...products, normalizedProduct]);
+    setProducts([normalizedProduct , ...products]);
+
+    toast.success(`"${newProduct.name}" added to product list, successfully!`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
   };
 
   const deleteProduct = (id, productName) => {
