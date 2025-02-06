@@ -10,6 +10,7 @@ import ErrorPage from './Components/Error Page/ErrorPage.jsx';
 import AllUsers from './Components/All Users/AllUsers.jsx';
 import Products from './Components/Products/Products.jsx';
 import SingleUser from './Components/Single User/SingleUser.jsx';
+import SingleProduct from './Components/Single Product/SingleProduct.jsx';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/singleUser/:userId",
         element: <SingleUser></SingleUser>,
+      },
+      {
+        path: "/singleProduct/:productId",
+        element: <SingleProduct></SingleProduct>,
       },
     ]
   },
