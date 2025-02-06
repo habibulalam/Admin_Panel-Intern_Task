@@ -1,45 +1,36 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useProducts } from "../Product Context Api/ProductContext";
 
 const SingleProduct = () => {
     const { productId } = useParams();
     console.log(productId);
 
+
+    const navigateToProductsRoute = useNavigate();
+
+    const { products, deleteProduct, isLoading } = useProducts();
+
     const [product, setProduct] = useState();
-    console.log(product);
-    const [loader, setLoader] = useState(true);
+    // console.log(product);
 
     useEffect(() => {
-        setLoader(true);
+        const selectedProduct = products.find(product => product.id === productId);
+        setProduct(selectedProduct);
+    }, [productId, products]);
 
-        fetch(`https://api.restful-api.dev/objects/${productId}`)
-            .then(res => res.json())
-            .then(data => {
-                // console.log(data);
-                const normalizedData = normalizeKeys(data);
-                console.log(normalizedData);
-                setProduct(normalizedData);
-                setLoader(false);
-            });
-    }, [productId]);
-
-    const normalizeKeys = (obj) => {
-        if (!obj || typeof obj !== 'object') return obj;
-
-        const newObj = {};
-        for (const key in obj) {
-            if (Object.prototype.hasOwnProperty.call(obj, key)) {
-                const newKey = key.toLowerCase().replace(/\s+/g, ''); // Convert keys to lowercase and remove spaces
-                const value = obj[key];
-                newObj[newKey] = typeof value === 'object' && value !== null ? normalizeKeys(value) : value;
-            }
-        }
-        return newObj;
-    };
+    const handleDeleteProductButton = (productId) => {
+        deleteProduct(productId);
+        navigateToProductsRoute('/products')
+    }
 
 
-    if (loader) {
+
+    if (isLoading) {
         return <div className="w-full h-screen flex justify-center items-center"><span className="loading loading-spinner loading-xl"></span></div>;
+    }
+    if (!product) {
+        return <div>Product not found</div>;
     }
 
     return (
@@ -106,6 +97,15 @@ const SingleProduct = () => {
                     <div className={`${product.data?.screensize ? 'block' : 'hidden'} font-semibold`}>Screen-Size:</div>
                     <div className={`${product.data?.screensize ? 'block' : 'hidden'}`}>{product.data?.screensize || 'Unknown'}</div>
 
+                </div>
+                {/* delete button */}
+                <div className="flex justify-center items-center mt-5">
+                    <button
+                        onClick={() => handleDeleteProductButton(product.id)}
+                        className="btn bg-red-500 text-white hover:scale-105 transition duration-500"
+                    >
+                        Remove this product
+                    </button>
                 </div>
             </div>
         </div>

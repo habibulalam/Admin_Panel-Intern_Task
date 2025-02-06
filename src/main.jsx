@@ -11,6 +11,7 @@ import AllUsers from './Components/All Users/AllUsers.jsx';
 import Products from './Components/Products/Products.jsx';
 import SingleUser from './Components/Single User/SingleUser.jsx';
 import SingleProduct from './Components/Single Product/SingleProduct.jsx';
+import { ProductsProvider } from './Components/Product Context Api/ProductContext.jsx';
 
 const router = createBrowserRouter([
   {
@@ -39,7 +40,9 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
+  <ProductsProvider>
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>
+  </ProductsProvider>
 )

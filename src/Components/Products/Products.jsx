@@ -1,37 +1,14 @@
-import { useEffect, useState } from "react";
+
 import { useNavigate } from "react-router-dom";
+import { useProducts } from "../Product Context Api/ProductContext";
 
 const Products = () => {
 
     const navigateToDynamicProduct = useNavigate();
 
-    const [products, setProducts] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        setIsLoading(true);
-
-        fetch('https://api.restful-api.dev/objects')
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setProducts(data);
-                setIsLoading(false);
-            });
-    }, []);
-
-    const normalizeKeys = (obj) => {
-        if (!obj) return {};
-
-        const newObj = {};
-        for (const key in obj) {
-            if (Object.prototype.hasOwnProperty.call(obj, key)) {
-                const newKey = key.toLowerCase().replace(/\s+/g, ''); // Convert keys to lowercase and remove spaces
-                newObj[newKey] = obj[key];
-            }
-        }
-        return newObj;
-    };
+    // calling the custom hook
+    const { products, isLoading } = useProducts();
+    console.log(products);
 
 
     const handleSingleProduct = (productId) => {
@@ -62,14 +39,12 @@ const Products = () => {
                         <tbody>
                             {/* row starts */}
                             {products?.map((product, index) => {
-                                const normalizedData = normalizeKeys(product.data);
-                                console.log(normalizedData);
                                 return (
                                     <tr key={index} onClick={() => handleSingleProduct(product.id)} className="hover:bg-gray-200 hover:cursor-pointer hover:scale-x-[1.02] transition duration-500">
                                         <th>{index + 1}</th>
                                         <td>{product.name}</td>
-                                        <td className={`${normalizedData.price ? '' : 'text-red-500'}`}>{normalizedData.price ? normalizedData.price+' $': 'Unknown'}</td>
-                                        <td className={`${normalizedData.color ? '' : 'text-red-500'}`}>{normalizedData.color ? normalizedData.color : 'Unknown'}</td>
+                                        <td className={`${product.data?.price ? '' : 'text-red-500'}`}>{product.data?.price ? product.data.price+' $': 'Unknown'}</td>
+                                        <td className={`${product.data?.color ? 'text-black' : 'text-red-500'}`}>{product.data?.color ? product.data.color : 'Unknown'}</td>
                                         <td>...View More</td>
                                     </tr>
                                 );
