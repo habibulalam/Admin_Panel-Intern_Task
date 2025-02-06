@@ -15,6 +15,7 @@ import { ProductsProvider } from './Components/Product Context Api/ProductContex
 import AddProduct from './Components/Add Product/AddProduct.jsx';
 import LogIn from './Components/Sing Up and Login/LogIn.jsx';
 import SignUp from './Components/Sing Up and Login/SignUp.jsx';
+import { AuthProvider } from './Components/AuthContext/AuthContext.jsx';
 
 const router = createBrowserRouter([
   {
@@ -55,9 +56,11 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById('root')).render(
-  <ProductsProvider>
-    <StrictMode>
-      <RouterProvider router={router} />
-    </StrictMode>
-  </ProductsProvider>
+  <AuthProvider>
+    <ProductsProvider>
+      <StrictMode>
+        <RouterProvider router={router} />
+      </StrictMode>
+    </ProductsProvider>
+  </AuthProvider>
 )

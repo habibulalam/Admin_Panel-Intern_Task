@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+import { useAuth } from "../AuthContext/AuthContext";
 
 
 const Sidebar = () => {
@@ -6,6 +7,9 @@ const Sidebar = () => {
     const handleNavLinkClick = () => {
         document.getElementById('my-drawer-2').checked = false;
     }
+
+    const { user, logout } = useAuth();
+    // console.log(user);
 
     return (
         <div>
@@ -58,23 +62,37 @@ const Sidebar = () => {
                                         </NavLink>
                                     </li>
 
-                                    <div className="flex gap-5 justify-between mt-14">
-                                        <p className="rounded-sm grow text-center">
-                                            <NavLink to={'/login'}
-                                                className={({ isActive }) => isActive ? 'flex items-center justify-center p-2 space-x-3 rounded-md bg-white text-custom-secondary shadow-lg shadow-custom-primary' : 'flex items-center justify-center p-2 space-x-3 rounded-md bg-gray-600 text-white hover:scale-105 hover:border hover:border-white transition duration-700'}
-                                                onClick={handleNavLinkClick}
-                                            >
-                                                <span>Log-In</span>
-                                            </NavLink>
-                                        </p>
-                                        <p className="rounded-sm grow text-center">
-                                            <NavLink to={'/signup'}
-                                                className={({ isActive }) => isActive ? 'flex items-center justify-center p-2 space-x-3 rounded-md bg-white text-custom-secondary shadow-lg shadow-custom-primary' : 'flex items-center justify-center p-2 space-x-3 rounded-md bg-gray-600 text-white hover:scale-105 hover:border hover:border-white transition duration-700'}
-                                                onClick={handleNavLinkClick}
-                                            >
-                                                <span>Sign-Up</span>
-                                            </NavLink>
-                                        </p>
+                                    <div>
+                                        {
+                                            user
+                                                ? <li className="rounded-sm mt-14">
+                                                    <NavLink
+                                                        className={'flex items-center justify-center p-2 space-x-3 rounded-md bg-gray-600 text-white hover:scale-105 hover:border hover:border-white transition duration-700'}
+                                                        onClick={logout}
+                                                    >
+                                                        <span>Logout</span>
+                                                    </NavLink>
+                                                </li>
+                                                : <div className="flex gap-5 justify-between mt-14">
+                                                    <p className="rounded-sm grow text-center">
+                                                        <NavLink to={'/login'}
+                                                            className={({ isActive }) => isActive ? 'flex items-center justify-center p-2 space-x-3 rounded-md bg-white text-custom-secondary shadow-lg shadow-custom-primary' : 'flex items-center justify-center p-2 space-x-3 rounded-md bg-gray-600 text-white hover:scale-105 hover:border hover:border-white transition duration-700'}
+                                                            onClick={handleNavLinkClick}
+                                                        >
+                                                            <span>Log-In</span>
+                                                        </NavLink>
+                                                    </p>
+                                                    <p className="rounded-sm grow text-center">
+                                                        <NavLink to={'/signup'}
+                                                            className={({ isActive }) => isActive ? 'flex items-center justify-center p-2 space-x-3 rounded-md bg-white text-custom-secondary shadow-lg shadow-custom-primary' : 'flex items-center justify-center p-2 space-x-3 rounded-md bg-gray-600 text-white hover:scale-105 hover:border hover:border-white transition duration-700'}
+                                                            onClick={handleNavLinkClick}
+                                                        >
+                                                            <span>Sign-Up</span>
+                                                        </NavLink>
+                                                    </p>
+                                                </div>
+                                        }
+
                                     </div>
                                 </ul>
                             </div>

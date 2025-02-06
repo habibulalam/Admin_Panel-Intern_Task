@@ -1,7 +1,13 @@
 import { useState } from "react";
+import { useAuth } from "../AuthContext/AuthContext";
+import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [formData, setFormData] = useState({ username: "", password: "" });
+  const { login } = useAuth();
+  const [formData, setFormData] = useState({ email: "", password: "" });
+
+  const navigateToRoot = useNavigate();  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -13,15 +19,33 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const user = users.find(
-      (user) => user.username === formData.username && user.password === formData.password
-    );
-    if (user) {
-      alert("Login successful!");
-      // You can redirect the user to the products page or another protected route here
+    const { email, password } = formData;
+    const success = login(email, password);
+    if (success) {
+        toast.success('Login Successful!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
+      // Redirect to root
+      navigateToRoot('/')  
+
     } else {
-      alert("Invalid username or password. Please try again.");
+      toast.error('Invalid email or password. Please try again.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
     }
   };
 
@@ -31,13 +55,13 @@ const Login = () => {
         <fieldset className="bg-base-200 border border-black p-4 rounded-box">
           <legend className="text-2xl font-semibold mb-4">Login</legend>
 
-          <label className="block mb-2">Username</label>
+          <label className="block mb-2">Email</label>
           <input
-            type="text"
-            name="username"
+            type="email"
+            name="email"
             className="w-full mb-4 p-2 border border-base-300 rounded"
-            placeholder="Enter username"
-            value={formData.username}
+            placeholder="Enter your email"
+            value={formData.email}
             onChange={handleChange}
             required
           />
@@ -47,7 +71,7 @@ const Login = () => {
             type="password"
             name="password"
             className="w-full mb-4 p-2 border border-base-300 rounded"
-            placeholder="Enter password"
+            placeholder="Enter your password"
             value={formData.password}
             onChange={handleChange}
             required
