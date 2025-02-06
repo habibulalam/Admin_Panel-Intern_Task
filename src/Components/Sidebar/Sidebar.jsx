@@ -48,6 +48,15 @@ const Sidebar = () => {
                                             <span>Products</span>
                                         </NavLink>
                                     </li>
+                                    <li className="rounded-sm">
+                                        <NavLink to={'addProduct'}
+                                            className={({ isActive }) => isActive ? 'flex items-center p-2 space-x-3 rounded-md bg-white text-custom-secondary shadow-lg shadow-custom-primary' : 'flex items-center p-2 space-x-3 rounded-md bg-gray-600 text-white hover:scale-105 hover:border hover:border-white transition duration-700'}
+                                            onClick={handleNavLinkClick}
+                                            >
+                                            <i className="fa-solid fa-boxes-packing"></i>
+                                            <span>Add Product</span>
+                                        </NavLink>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
