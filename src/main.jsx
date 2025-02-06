@@ -13,6 +13,8 @@ import SingleUser from './Components/Single User/SingleUser.jsx';
 import SingleProduct from './Components/Single Product/SingleProduct.jsx';
 import { ProductsProvider } from './Components/Product Context Api/ProductContext.jsx';
 import AddProduct from './Components/Add Product/AddProduct.jsx';
+import LogIn from './Components/Sing Up and Login/LogIn.jsx';
+import SignUp from './Components/Sing Up and Login/SignUp.jsx';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
       {
         path: "/addProduct",
         element: <AddProduct></AddProduct>,
+      },
+      {
+        path: "/login",
+        element: <LogIn></LogIn>,
+      },
+      {
+        path: "/signup",
+        element: <SignUp></SignUp>,
       },
     ]
   },

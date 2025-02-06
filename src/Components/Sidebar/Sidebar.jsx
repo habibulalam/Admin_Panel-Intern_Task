@@ -34,7 +34,7 @@ const Sidebar = () => {
                                         <NavLink to={'allUsers'}
                                             className={({ isActive }) => isActive ? 'flex items-center p-2 space-x-3 rounded-md bg-white text-custom-secondary shadow-lg shadow-custom-primary' : 'flex items-center p-2 space-x-3 rounded-md bg-gray-600 text-white hover:scale-105 hover:border hover:border-white transition duration-700'}
                                             onClick={handleNavLinkClick}
-                                            >
+                                        >
                                             <i className="fa-solid fa-user"></i>
                                             <span>Users</span>
                                         </NavLink>
@@ -43,7 +43,7 @@ const Sidebar = () => {
                                         <NavLink to={'products'}
                                             className={({ isActive }) => isActive ? 'flex items-center p-2 space-x-3 rounded-md bg-white text-custom-secondary shadow-lg shadow-custom-primary' : 'flex items-center p-2 space-x-3 rounded-md bg-gray-600 text-white hover:scale-105 hover:border hover:border-white transition duration-700'}
                                             onClick={handleNavLinkClick}
-                                            >
+                                        >
                                             <i className="fa-solid fa-box"></i>
                                             <span>Products</span>
                                         </NavLink>
@@ -52,11 +52,30 @@ const Sidebar = () => {
                                         <NavLink to={'addProduct'}
                                             className={({ isActive }) => isActive ? 'flex items-center p-2 space-x-3 rounded-md bg-white text-custom-secondary shadow-lg shadow-custom-primary' : 'flex items-center p-2 space-x-3 rounded-md bg-gray-600 text-white hover:scale-105 hover:border hover:border-white transition duration-700'}
                                             onClick={handleNavLinkClick}
-                                            >
+                                        >
                                             <i className="fa-solid fa-boxes-packing"></i>
                                             <span>Add Product</span>
                                         </NavLink>
                                     </li>
+
+                                    <div className="flex gap-5 justify-between mt-14">
+                                        <p className="rounded-sm grow text-center">
+                                            <NavLink to={'/login'}
+                                                className={({ isActive }) => isActive ? 'flex items-center justify-center p-2 space-x-3 rounded-md bg-white text-custom-secondary shadow-lg shadow-custom-primary' : 'flex items-center justify-center p-2 space-x-3 rounded-md bg-gray-600 text-white hover:scale-105 hover:border hover:border-white transition duration-700'}
+                                                onClick={handleNavLinkClick}
+                                            >
+                                                <span>Log-In</span>
+                                            </NavLink>
+                                        </p>
+                                        <p className="rounded-sm grow text-center">
+                                            <NavLink to={'/signup'}
+                                                className={({ isActive }) => isActive ? 'flex items-center justify-center p-2 space-x-3 rounded-md bg-white text-custom-secondary shadow-lg shadow-custom-primary' : 'flex items-center justify-center p-2 space-x-3 rounded-md bg-gray-600 text-white hover:scale-105 hover:border hover:border-white transition duration-700'}
+                                                onClick={handleNavLinkClick}
+                                            >
+                                                <span>Sign-Up</span>
+                                            </NavLink>
+                                        </p>
+                                    </div>
                                 </ul>
                             </div>
                         </div>
