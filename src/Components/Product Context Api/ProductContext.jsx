@@ -1,4 +1,5 @@
 import { createContext, useState, useContext, useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 // Create the ProductsContext
 const ProductsContext = createContext();
@@ -47,10 +48,28 @@ export const ProductsProvider = ({ children }) => {
     setProducts([...products, normalizedProduct]);
   };
 
-  const deleteProduct = (id) => {
-    setProducts(products.filter(product => product.id !== id));
-    alert('Product removed')
+  const deleteProduct = (id, productName) => {
+    const confirmed = window.confirm(`Are you sure you want to delete "${productName}"?`);
+
+    if (confirmed) {
+      setProducts(products.filter(product => product.id !== id));
+      toast.error(`"${productName}" Removed from product list.`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      return true
+    }
+    else{
+      return false
+    }
   };
+
 
   return (
     <ProductsContext.Provider value={{ products, addProduct, deleteProduct, isLoading }}>

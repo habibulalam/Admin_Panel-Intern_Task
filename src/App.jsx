@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { Outlet, useLocation } from 'react-router-dom'
 import Sidebar from './Components/Sidebar/Sidebar'
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const [urlLocation, setUrlLocation] = useState('');
@@ -14,6 +15,19 @@ function App() {
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+
       <div className='flex flex-col md:flex-row gap-4'>
         <Sidebar></Sidebar>
 

@@ -19,9 +19,9 @@ const SingleProduct = () => {
         setProduct(selectedProduct);
     }, [productId, products]);
 
-    const handleDeleteProductButton = (productId) => {
-        deleteProduct(productId);
-        navigateToProductsRoute('/products')
+    const handleDeleteProductButton = (productId , productName) => {
+        const isConfirmed = deleteProduct(productId, productName);
+        isConfirmed && navigateToProductsRoute('/products')
     }
 
 
@@ -101,7 +101,7 @@ const SingleProduct = () => {
                 {/* delete button */}
                 <div className="flex justify-center items-center mt-5">
                     <button
-                        onClick={() => handleDeleteProductButton(product.id)}
+                        onClick={() => handleDeleteProductButton(product.id , product.name)}
                         className="btn bg-red-500 text-white hover:scale-105 transition duration-500"
                     >
                         Remove this product
