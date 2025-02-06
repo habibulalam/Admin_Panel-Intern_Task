@@ -29,19 +29,39 @@ export const ProductsProvider = ({ children }) => {
 
   useEffect(() => {
     setIsLoading(true);
-
-    fetch('https://api.restful-api.dev/objects')
-      .then(res => res.json())
-      .then(data => {
+  
+    const fetchData = async () => {
+      try {
+        // Attempt to fetch data from the primary API
+        const response = await fetch('https://api.restful-api.dev/objects');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
         const normalizedData = data.map(product => normalizeKeys(product));
         setProducts(normalizedData);
+      } catch (error) {
+        console.error('Error fetching products from API, using backup data:', error);
+        try {
+          // Fetch data from backup JSON file if primary API request fails
+          const backupResponse = await fetch('/backup-api-data.json');
+          if (!backupResponse.ok) {
+            throw new Error('Network response was not ok');
+          }
+          const backupData = await backupResponse.json();
+          const normalizedData = backupData.map(product => normalizeKeys(product));
+          setProducts(normalizedData);
+        } catch (backupError) {
+          console.error('Error fetching backup products:', backupError);
+        }
+      } finally {
         setIsLoading(false);
-      })
-      .catch(error => {
-        console.error('Error fetching products:', error);
-        setIsLoading(false);
-      });
+      }
+    };
+  
+    fetchData();
   }, []);
+  
 
   const addProduct = (newProduct) => {
     const normalizedProduct = normalizeKeys(newProduct);
