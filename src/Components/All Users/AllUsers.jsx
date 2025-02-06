@@ -48,7 +48,7 @@ const AllUsers = () => {
     return (
         <div>
             {/* Filter Input */}
-            <div className="my-4 flex justify-center items-center gap-4">
+            <div className="my-4 flex flex-col sm:flex-row justify-center items-center gap-4">
                 <h1 className="font-semibold text-lg">Filters :</h1>
                 <input
                     type="text"
