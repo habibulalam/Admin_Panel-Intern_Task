@@ -2,6 +2,10 @@
 
 A responsive admin dashboard application built with React and Tailwind CSS. The dashboard integrates with a RESTful API to display user and product data.
 
+## Live Demo
+
+Check out the live demo of the application: [Live Demo](https://responsive-dashboard-task.netlify.app/)
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -120,5 +124,3 @@ This is a single-page application (SPA) that serves as an admin dashboard. It fe
 ## Contributing
 
 Contributions are welcome! Please fork the repository and submit a pull request.
-
-```
